@@ -44,4 +44,13 @@ public class ShoppingCartTest {
 
         assertThat(cart.getTotalPrice()).isEqualTo(0.0);
     }
+
+    @Test
+    void applyingDiscount_shouldReduceTotalPrice() {
+        cart.addItem(new Item("Milk", 20.0, 2));
+
+        cart.applyDiscount(10);
+
+        assertThat(cart.getTotalPrice()).isEqualTo(36.0);
+    }
 }
