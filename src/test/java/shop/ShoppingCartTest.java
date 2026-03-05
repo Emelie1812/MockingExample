@@ -40,7 +40,7 @@ public class ShoppingCartTest {
         Item milk = new Item("Milk", 20.0, 1);
         cart.addItem(milk);
 
-        cart.removeItem(milk);
+        cart.removeItem("milk");
 
         assertThat(cart.getTotalPrice()).isEqualTo(0.0);
     }
@@ -52,5 +52,26 @@ public class ShoppingCartTest {
         cart.applyDiscount(10);
 
         assertThat(cart.getTotalPrice()).isEqualTo(36.0);
+    }
+
+    @Test
+    void discountOver100_shouldThrowException() {
+        assertThatThrownBy(() ->
+                cart.applyDiscount(200))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void negativeQuantity_shouldThrowException() {
+        assertThatThrownBy(() ->
+                new Item("Milk", 20.0, -1))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void removingNonExistentItem_shouldNotCrash() {
+        cart.removeItem("Banana");
+
+        assertThat(cart.getTotalPrice()).isEqualTo(0.0);
     }
 }

@@ -10,8 +10,8 @@ public class ShoppingCart {
         items.add(item);
     }
 
-    public void removeItem(Item item) {
-        items.remove(item);
+    public void removeItem(String name) {
+        items.removeIf(item -> item.getName().equals(name));
     }
 
     public void applyDiscount(double percentage) {
