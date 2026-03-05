@@ -24,4 +24,14 @@ public class ShoppingCartTest {
 
         assertThat(cart.getTotalPrice()).isEqualTo(20.0);
     }
+
+    @Test
+    void updatingQuantity_shouldUpdateTotalPrice() {
+        Item milk = new Item("Milk", 20.0, 1);
+        cart.addItem(milk);
+
+        milk.updateQuantity(3);
+
+        assertThat(cart.getTotalPrice()).isEqualTo(60.0);
+    }
 }
